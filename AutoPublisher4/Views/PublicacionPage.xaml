@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AutoPublisher4.Views.PublicacionPage"
+    Title="Publicación">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <Grid
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Primary}"
+            Padding="16,48,16,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Text="Publicaciones"
+                TextColor="White"
+                FontSize="22"
+                FontAttributes="Bold"
+                VerticalOptions="Center" />
+            <Button
+                Grid.Column="1"
+                Text="+"
+                TextColor="White"
+                BackgroundColor="Transparent"
+                FontSize="28"
+                Padding="8,0"
+                VerticalOptions="Center"
+                Command="{Binding NuevaPublicacionCommand}" />
+        </Grid>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16" Spacing="12">
+
+                <!-- Empty state -->
+                <VerticalStackLayout
+                    IsVisible="{Binding NoHayPublicaciones}"
+                    Spacing="12"
+                    Padding="0,40"
+                    HorizontalOptions="Center">
+                    <Label
+                        Text="No hay publicaciones aún"
+                        FontSize="16"
+                        TextColor="{StaticResource Gray400}"
+                        HorizontalOptions="Center" />
+                    <Label
+                        Text="Tocá + para crear una nueva"
+                        FontSize="13"
+                        TextColor="{StaticResource Gray400}"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <!-- Lista de publicaciones -->
+                <CollectionView
+                    ItemsSource="{Binding Publicaciones}"
+                    IsVisible="{Binding HayPublicaciones}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Margin="0,0,0,8"
+                                Padding="16,12"
+                                Stroke="{StaticResource Gray100}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 8">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                        <Label
+                                            Text="{Binding Titulo}"
+                                            FontSize="15"
+                                            FontAttributes="Bold" />
+                                        <Label
+                                            Text="{Binding Resumen}"
+                                            FontSize="12"
+                                            TextColor="{StaticResource Gray400}"
+                                            MaxLines="2"
+                                            LineBreakMode="TailTruncation" />
+                                        <Label
+                                            Text="{Binding FechaCreacion, StringFormat='{0:dd/MM/yyyy}'}"
+                                            FontSize="11"
+                                            TextColor="{StaticResource Gray300}" />
+                                    </VerticalStackLayout>
+                                    <Border
+                                        Grid.Column="1"
+                                        Padding="8,4"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 4"
+                                        BackgroundColor="{Binding EstadoColor}"
+                                        VerticalOptions="Start">
+                                        <Label
+                                            Text="{Binding Estado}"
+                                            FontSize="11"
+                                            TextColor="White" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AutoPublisher4.Views.ConfiguracionPage"
+    Title="Configuración">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <Grid
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Primary}"
+            Padding="16,48,16,16">
+            <Label
+                Text="Configuración"
+                TextColor="White"
+                FontSize="22"
+                FontAttributes="Bold" />
+        </Grid>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16" Spacing="12">
+
+                <!-- Sección: General -->
+                <Label Text="General" FontSize="13" TextColor="{StaticResource Gray400}" Margin="0,4,0,0" />
+
+                <Border
+                    Stroke="{StaticResource Gray100}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8">
+                    <VerticalStackLayout Spacing="0">
+                        <Grid Padding="16,14" ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" Text="Tema oscuro" FontSize="14" VerticalOptions="Center" />
+                            <Switch
+                                Grid.Column="1"
+                                IsToggled="{Binding TemaOscuro}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView HeightRequest="0.5" Color="{StaticResource Gray100}" Margin="16,0" />
+                        <Grid Padding="16,14" ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" Text="Notificaciones" FontSize="14" VerticalOptions="Center" />
+                            <Switch
+                                Grid.Column="1"
+                                IsToggled="{Binding Notificaciones}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Sección: Envío -->
+                <Label Text="Envío de correos" FontSize="13" TextColor="{StaticResource Gray400}" Margin="0,8,0,0" />
+
+                <Border
+                    Stroke="{StaticResource Gray100}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8">
+                    <VerticalStackLayout Spacing="0">
+                        <Grid Padding="16,14" ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                <Label Text="Reintentos automáticos" FontSize="14" />
+                                <Label Text="Al fallar el envío" FontSize="12" TextColor="{StaticResource Gray400}" />
+                            </VerticalStackLayout>
+                            <Switch
+                                Grid.Column="1"
+                                IsToggled="{Binding ReintentosAutomaticos}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView HeightRequest="0.5" Color="{StaticResource Gray100}" Margin="16,0" />
+                        <Grid Padding="16,14" ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" Text="Máx. reintentos" FontSize="14" VerticalOptions="Center" />
+                            <Stepper
+                                Grid.Column="1"
+                                Minimum="1"
+                                Maximum="5"
+                                Value="{Binding MaxReintentos}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Sección: Acerca de -->
+                <Label Text="Acerca de" FontSize="13" TextColor="{StaticResource Gray400}" Margin="0,8,0,0" />
+
+                <Border
+                    Stroke="{StaticResource Gray100}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8">
+                    <Grid Padding="16,14" ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="Versión" FontSize="14" VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding Version}"
+                            FontSize="14"
+                            TextColor="{StaticResource Gray400}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

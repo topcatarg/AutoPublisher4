@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AutoPublisher4.Views.CuentasCorreoPage"
+    Title="Cuentas de correo">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <Grid
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Primary}"
+            Padding="16,48,16,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Text="Cuentas de correo"
+                TextColor="White"
+                FontSize="22"
+                FontAttributes="Bold"
+                VerticalOptions="Center" />
+            <Button
+                Grid.Column="1"
+                Text="+"
+                TextColor="White"
+                BackgroundColor="Transparent"
+                FontSize="28"
+                Padding="8,0"
+                VerticalOptions="Center"
+                Command="{Binding AgregarCuentaCommand}" />
+        </Grid>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16" Spacing="12">
+
+                <CollectionView ItemsSource="{Binding Cuentas}">
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout Spacing="12" Padding="0,40" HorizontalOptions="Center">
+                            <Label
+                                Text="No hay cuentas configuradas"
+                                FontSize="16"
+                                TextColor="{StaticResource Gray400}"
+                                HorizontalOptions="Center" />
+                            <Label
+                                Text="Tocá + para agregar una cuenta"
+                                FontSize="13"
+                                TextColor="{StaticResource Gray400}"
+                                HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Margin="0,0,0,8"
+                                Padding="16,12"
+                                Stroke="{StaticResource Gray100}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 8">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <!-- Iniciales -->
+                                    <Border
+                                        Grid.Column="0"
+                                        WidthRequest="42"
+                                        HeightRequest="42"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 21"
+                                        BackgroundColor="{StaticResource Secondary}"
+                                        Margin="0,0,12,0">
+                                        <Label
+                                            Text="{Binding Iniciales}"
+                                            FontSize="15"
+                                            FontAttributes="Bold"
+                                            TextColor="{StaticResource Primary}"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center" />
+                                    </Border>
+                                    <!-- Info -->
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                        <Label Text="{Binding Nombre}" FontSize="14" FontAttributes="Bold" />
+                                        <Label Text="{Binding Email}" FontSize="12" TextColor="{StaticResource Gray400}" />
+                                        <Label Text="{Binding ServidorSmtp}" FontSize="11" TextColor="{StaticResource Gray300}" />
+                                    </VerticalStackLayout>
+                                    <!-- Acciones -->
+                                    <VerticalStackLayout Grid.Column="2" Spacing="4" VerticalOptions="Center">
+                                        <Button
+                                            Text="✏️"
+                                            BackgroundColor="Transparent"
+                                            FontSize="16"
+                                            Padding="4"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditarCuentaCommand}"
+                                            CommandParameter="{Binding .}" />
+                                        <Button
+                                            Text="🗑️"
+                                            BackgroundColor="Transparent"
+                                            FontSize="16"
+                                            Padding="4"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EliminarCuentaCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

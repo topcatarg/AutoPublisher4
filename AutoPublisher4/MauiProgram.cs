@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using AutoPublisher4.ViewModels;
+using AutoPublisher4.Views;
 
 namespace AutoPublisher4
 {
@@ -16,8 +18,22 @@ namespace AutoPublisher4
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
+
+            // ViewModels
+            builder.Services.AddTransient<PublicacionViewModel>();
+            builder.Services.AddTransient<PublicarViewModel>();
+            builder.Services.AddTransient<CuentasCorreoViewModel>();
+            builder.Services.AddTransient<HerramientasViewModel>();
+            builder.Services.AddTransient<ConfiguracionViewModel>();
+
+            // Pages
+            builder.Services.AddTransient<PublicacionPage>();
+            builder.Services.AddTransient<PublicarPage>();
+            builder.Services.AddTransient<CuentasCorreoPage>();
+            builder.Services.AddTransient<HerramientasPage>();
+            builder.Services.AddTransient<ConfiguracionPage>();
 
             return builder.Build();
         }
