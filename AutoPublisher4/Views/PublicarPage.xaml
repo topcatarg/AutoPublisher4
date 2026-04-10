@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AutoPublisher4.Views.PublicarPage"
+    Title="Publicar">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <Grid
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Primary}"
+            Padding="16,48,16,16">
+            <Label
+                Text="Publicar"
+                TextColor="White"
+                FontSize="22"
+                FontAttributes="Bold" />
+        </Grid>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16" Spacing="16">
+
+                <!-- Selección de publicación -->
+                <Label Text="Publicación" FontSize="13" TextColor="{StaticResource Gray400}" />
+                <Border
+                    Padding="12"
+                    Stroke="{StaticResource Gray100}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8">
+                    <Picker
+                        Title="Seleccionar publicación..."
+                        ItemsSource="{Binding PublicacionesDisponibles}"
+                        ItemDisplayBinding="{Binding Titulo}"
+                        SelectedItem="{Binding PublicacionSeleccionada}" />
+                </Border>
+
+                <!-- Selección de cuentas -->
+                <Label Text="Enviar a" FontSize="13" TextColor="{StaticResource Gray400}" />
+                <CollectionView ItemsSource="{Binding Cuentas}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Margin="0,0,0,8"
+                                Padding="12"
+                                Stroke="{StaticResource Gray100}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 8">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                        <Label Text="{Binding Nombre}" FontSize="14" FontAttributes="Bold" />
+                                        <Label Text="{Binding Email}" FontSize="12" TextColor="{StaticResource Gray400}" />
+                                    </VerticalStackLayout>
+                                    <CheckBox
+                                        Grid.Column="1"
+                                        IsChecked="{Binding Seleccionada}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Botón publicar -->
+                <Button
+                    Text="Publicar ahora"
+                    Command="{Binding PublicarCommand}"
+                    IsEnabled="{Binding PuedePublicar}"
+                    Margin="0,8,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>
